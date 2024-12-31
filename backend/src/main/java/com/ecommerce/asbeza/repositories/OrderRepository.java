@@ -9,5 +9,6 @@ import com.ecommerce.asbeza.models.Order;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
-    List<Order> findByEmail(String email);
+    List<Order> findAllByEmail(String email);
+    Order findByEmailandOrderId(String email, Long OrderId);
 }

@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.ecommerce.asbeza.models.Category;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long> { }
+public interface CategoryRepository extends JpaRepository<Category, Long> {
+    Category findByName(String categoryName);
+}

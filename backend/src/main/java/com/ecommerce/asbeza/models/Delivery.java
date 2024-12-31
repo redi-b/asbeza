@@ -1,13 +1,12 @@
 package com.ecommerce.asbeza.models;
 
+import com.ecommerce.asbeza.types.DeliveryStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-enum DeliveryStatus {
-    Pending, Shipped, Delivered
-}
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "deliveries")
@@ -22,6 +21,8 @@ public class Delivery {
     @JoinColumn(name = "order_id")
     private Order order;
 
+    private LocalDate scheduledDate;
+    private String deliveryAddress;
     private String deliveryPersonnel;
     private DeliveryStatus deliveryStatus = DeliveryStatus.Pending;
 }
