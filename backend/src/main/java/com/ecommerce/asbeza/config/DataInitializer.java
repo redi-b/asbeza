@@ -117,12 +117,93 @@ public class DataInitializer implements CommandLineRunner {
                         "Traditional Ethiopian honey wine, Tej, available in bottles.",
                         "Beverages",
                         new BigDecimal("400.00"),
-                        "kg",
+                        "litre",
                         15,
                         new BigDecimal("0.0"),
                         "https://fakeimg.pl/100x100?text=Tej"
+                ),
+                new ProductRequestDTO(
+                        "Shinkurt (Onion)",
+                        "Fresh Ethiopian onions, used in stews and sauces.",
+                        "Vegetables",
+                        new BigDecimal("50.00"),
+                        "kg",
+                        80,
+                        new BigDecimal("0.0"),
+                        "https://fakeimg.pl/100x100?text=Shinkurt"
+                ),
+                new ProductRequestDTO(
+                        "Nech Shinkurt (Garlic)",
+                        "Ethiopian garlic, used as a key ingredient in traditional dishes.",
+                        "Vegetables",
+                        new BigDecimal("200.00"),
+                        "kg",
+                        30,
+                        new BigDecimal("0.0"),
+                        "https://fakeimg.pl/100x100?text=Garlic"
+                ),
+                new ProductRequestDTO(
+                        "Dinich (Potato)",
+                        "Fresh Ethiopian potatoes, perfect for making Alicha.",
+                        "Vegetables",
+                        new BigDecimal("25.00"),
+                        "kg",
+                        100,
+                        new BigDecimal("0.0"),
+                        "https://fakeimg.pl/100x100?text=Dinich"
+                ),
+                new ProductRequestDTO(
+                        "Tikel Gomen (Cabbage)",
+                        "Fresh Ethiopian cabbage, ideal for Tikel Gomen stew.",
+                        "Vegetables",
+                        new BigDecimal("30.00"),
+                        "kg",
+                        50,
+                        new BigDecimal("0.0"),
+                        "https://fakeimg.pl/100x100?text=Cabbage"
+                ),
+                new ProductRequestDTO(
+                        "Karia (Green Chili)",
+                        "Ethiopian green chilies, adding a spicy kick to dishes.",
+                        "Spices",
+                        new BigDecimal("80.00"),
+                        "kg",
+                        20,
+                        new BigDecimal("0.0"),
+                        "https://fakeimg.pl/100x100?text=Karia"
+                ),
+                new ProductRequestDTO(
+                        "Timatim (Tomato)",
+                        "Fresh Ethiopian tomatoes, a staple for salads and sauces.",
+                        "Vegetables",
+                        new BigDecimal("35.00"),
+                        "kg",
+                        90,
+                        new BigDecimal("0.0"),
+                        "https://fakeimg.pl/100x100?text=Timatim"
+                ),
+                new ProductRequestDTO(
+                        "Telba (Flaxseed)",
+                        "Ethiopian flaxseed, perfect for making telba juice.",
+                        "Grains",
+                        new BigDecimal("150.00"),
+                        "kg",
+                        60,
+                        new BigDecimal("0.0"),
+                        "https://fakeimg.pl/100x100?text=Telba"
+                ),
+                new ProductRequestDTO(
+                        "Kibe (Spiced Butter)",
+                        "Traditional Ethiopian spiced butter, used in many dishes.",
+                        "Dairy",
+                        new BigDecimal("400.00"),
+                        "kg",
+                        20,
+                        new BigDecimal("0.0"),
+                        "https://fakeimg.pl/100x100?text=Kibe"
                 )
         );
+
 
         products.forEach(product -> productService.addProduct(product, null));
 
