@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<AnchorPane stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/17.0.6"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.asbeza.frontend.controllers.admin.ManageProductsController">
+
+    <!-- Navbar -->
+    <HBox AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20" spacing="8">
+        <HBox styleClass="navbar">
+            <Label fx:id="lblUserName" styleClass="navbar-label" />
+        </HBox>
+        <HBox styleClass="navbar">
+            <Label text="ADMIN" styleClass="navbar-label" />
+        </HBox>
+    </HBox>
+    <HBox spacing="10" styleClass="navbar" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+        <Button text="Back to Dashboard" onAction="#goToDashboard" styleClass="navbar-btn" />
+        <Button text="Log out" onAction="#handleLogout" styleClass="button-red" />
+    </HBox>
+
+    <!-- Page Title -->
+    <Label styleClass="text-title" text="Manage Inventory" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="80" />
+
+    <!-- Search Bar and Category Filter -->
+    <HBox spacing="10" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="140" alignment="CENTER">
+        <!-- Search Bar -->
+        <TextField fx:id="searchField" promptText="Search products..." styleClass="search-bar" />
+
+        <!-- Category Filter -->
+        <ComboBox fx:id="categoryFilter" promptText="Select category" styleClass="category-filter">
+            <!-- Categories dynamically populated from the controller -->
+        </ComboBox>
+        <Button text="Clear" onAction="#handleClearFilter" styleClass="clear-btn" />
+    </HBox>
+
+    <!-- Scrollable Product List -->
+    <ScrollPane fitToWidth="true" layoutX="50.0" layoutY="100.0" styleClass="scroll-form"
+                vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="50.0"
+                AnchorPane.rightAnchor="50.0"  AnchorPane.topAnchor="180.0">
+        <VBox alignment="CENTER" spacing="2">
+            <!-- Loading Indicator -->
+            <Label fx:id="loadingLabel" text="Loading ..." alignment="TOP_CENTER"
+                   visible="false" managed="false" />
+            <!-- Error Message -->
+            <Label fx:id="errorLabel" alignment="TOP_CENTER"
+                   visible="false" managed="false" styleClass="error-message" />
+
+            <!-- Form Container -->
+            <VBox fx:id="productsContainer" spacing="20" styleClass="vbox-centered">
+                <!-- Dynamic Product Items will be added here -->
+            </VBox>
+        </VBox>
+    </ScrollPane>
+
+</AnchorPane>

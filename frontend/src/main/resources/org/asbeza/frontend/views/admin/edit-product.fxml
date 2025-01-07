@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.geometry.Insets?>
+<AnchorPane stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/17.0.6"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.asbeza.frontend.controllers.admin.EditProductController">
+
+    <!-- Navbar -->
+    <HBox AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20" spacing="8">
+        <HBox styleClass="navbar">
+            <Label fx:id="lblUserName" styleClass="navbar-label" />
+        </HBox>
+        <HBox styleClass="navbar">
+            <Label text="ADMIN" styleClass="navbar-label" />
+        </HBox>
+    </HBox>
+    <HBox spacing="10" styleClass="navbar" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+        <Button text="Back to Products" onAction="#goToManageProducts" styleClass="navbar-btn" />
+        <Button text="Back to Dashboard" onAction="#goToDashboard" styleClass="navbar-btn" />
+        <Button text="Log out" onAction="#handleLogout" styleClass="button-red" />
+    </HBox>
+
+    <!-- Page Title -->
+    <Label styleClass="text-title" text="Edit Product" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="80" />
+
+    <ScrollPane fitToWidth="true" layoutX="50.0" layoutY="100.0" styleClass="scroll-form"
+                vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="150.0"
+                AnchorPane.rightAnchor="150.0"  AnchorPane.topAnchor="120.0">
+        <!-- Form Container -->
+        <VBox alignment="CENTER" spacing="20" styleClass="vbox-centered">
+            <!-- Product Name -->
+            <VBox alignment="CENTER_LEFT" spacing="5">
+                <Label styleClass="label-normal" text="Product Name:"/>
+                <TextField fx:id="txtProductName" prefWidth="250"/>
+            </VBox>
+
+            <!-- Product Price -->
+            <HBox spacing="10">
+                <VBox alignment="CENTER_LEFT" spacing="5">
+                    <Label styleClass="label-normal" text="Price:"/>
+                    <TextField fx:id="txtPrice" prefWidth="250"/>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" spacing="5">
+                    <Label styleClass="label-normal" text="Price Per"/>
+                    <TextField fx:id="txtPricePer" prefWidth="300"/>
+                </VBox>
+            </HBox>
+
+            <!-- Product Category -->
+            <VBox alignment="CENTER_LEFT" spacing="5">
+                <Label styleClass="label-normal" text="Category:"/>
+                <TextField fx:id="txtCategory" prefWidth="250"/>
+            </VBox>
+
+            <!-- Stock Quantity -->
+            <VBox alignment="CENTER_LEFT" spacing="5">
+                <Label styleClass="label-normal" text="Stock Quantity:"/>
+                <TextField fx:id="txtStockQuantity" prefWidth="250"/>
+            </VBox>
+
+            <!-- Discount Percentage -->
+            <VBox alignment="CENTER_LEFT" spacing="5">
+                <Label styleClass="label-normal" text="Discount (%):"/>
+                <TextField fx:id="txtDiscountPercentage" prefWidth="250"/>
+            </VBox>
+
+            <!-- Product Description -->
+            <VBox alignment="CENTER_LEFT" spacing="5">
+                <Label text="Description:" styleClass="label-normal" />
+                <TextArea fx:id="txtDescription" prefWidth="250" prefRowCount="4" />
+            </VBox>
+
+            <Label fx:id="errorLabel" visible="false" styleClass="error-message" managed="false" />
+
+        </VBox>
+    </ScrollPane>
+    <!-- Save Button -->
+    <Button fx:id="btnSaveProduct" onAction="#handleSaveProduct"
+            prefWidth="250" styleClass="button-primary"
+            text="Save Product"
+            AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="200.0"
+            AnchorPane.rightAnchor="200.0"
+    />
+
+</AnchorPane>

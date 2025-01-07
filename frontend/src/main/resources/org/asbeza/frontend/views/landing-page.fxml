@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.asbeza.frontend.controllers.LandingPageController">
+
+    <!-- VBox for main content -->
+    <VBox alignment="CENTER" spacing="30.0" prefWidth="600.0" prefHeight="500.0"
+          AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="50" AnchorPane.bottomAnchor="50">
+        <Label prefHeight="40.0" styleClass="text-title" text="Welcome to Asbeza" wrapText="true">
+            <font>
+                <Font name="Times New Roman Bold" size="24.0"/>
+            </font>
+        </Label>
+        <VBox alignment="CENTER" spacing="10.0">
+            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="26.0" prefWidth="339.0"
+                    styleClass="button-secondary" text="Log in"/>
+            <Button mnemonicParsing="false" onAction="#onRegisterButtonClick" prefHeight="26.0" prefWidth="339.0"
+                    styleClass="button-secondary" text="Register"/>
+        </VBox>
+    </VBox>
+
+    <!-- HBox for hyperlinks, anchored to the bottom-right -->
+    <HBox alignment="BOTTOM_RIGHT" spacing="10.0"
+          AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="10">
+    <Hyperlink onAction="#onAdminLoginClick" prefHeight="24.0" prefWidth="54.0" text="Admin"/>
+        <Hyperlink onAction="#onDeliveryLoginClick" prefHeight="24.0" prefWidth="126.0" text="Delivery Personnel"/>
+    </HBox>
+
+</AnchorPane>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/styles.css"
+            fx:controller="org.asbeza.frontend.controllers.delivery.DashboardController">
+
+    <!-- Navbar -->
+    <HBox AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20" spacing="8">
+        <HBox styleClass="navbar">
+            <Label fx:id="lblUserName" styleClass="navbar-label" />
+        </HBox>
+        <HBox styleClass="navbar">
+            <Label text="DELIVERY PERSONNEL" styleClass="navbar-label" />
+        </HBox>
+    </HBox>
+    <HBox spacing="10" styleClass="navbar" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+        <Button text="Delivery History" onAction="#goToDeliveryHistory" styleClass="navbar-btn" />
+        <Button text="Log out" onAction="#handleLogout" styleClass="button-red" />
+    </HBox>
+
+    <!-- Page Title -->
+    <Label styleClass="text-title" text="Active Deliveries" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="80" />
+
+    <!-- Scrollable Delivery List -->
+    <ScrollPane fitToWidth="true" styleClass="scroll-list" vbarPolicy="ALWAYS"
+                AnchorPane.topAnchor="120" AnchorPane.bottomAnchor="20"
+                AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
+        <VBox alignment="CENTER" spacing="10" styleClass="vbox-centered">
+            <!-- Loading Indicator -->
+            <Label fx:id="loadingLabel" text="Loading deliveries..." alignment="TOP_CENTER"
+                   visible="false" managed="false" />
+            <!-- Error Message -->
+            <Label fx:id="errorLabel" alignment="TOP_CENTER"
+                   visible="false" managed="false" styleClass="error-message" />
+
+            <!-- Refresh Button -->
+            <AnchorPane>
+                <Button text="Refresh" onAction="#handleRefresh" styleClass="refresh-btn"
+                        AnchorPane.rightAnchor="20" AnchorPane.topAnchor="0"/>
+            </AnchorPane>
+
+            <VBox fx:id="ordersContainer" spacing="20" styleClass="vbox-centered">
+                <!-- Dynamic Delivery Orders will be added here -->
+            </VBox>
+        </VBox>
+    </ScrollPane>
+</AnchorPane>

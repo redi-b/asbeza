@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<AnchorPane stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/17.0.6"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.asbeza.frontend.controllers.admin.EditUserController">
+
+    <!-- Navbar -->
+    <HBox AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20" spacing="8">
+        <HBox styleClass="navbar">
+            <Label fx:id="lblUserName" styleClass="navbar-label" />
+        </HBox>
+        <HBox styleClass="navbar">
+            <Label text="ADMIN" styleClass="navbar-label" />
+        </HBox>
+    </HBox>
+    <HBox spacing="10" styleClass="navbar" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+        <Button text="Back to Users" onAction="#goToManageUsers" styleClass="navbar-btn" />
+        <Button text="Back to Dashboard" onAction="#goToDashboard" styleClass="navbar-btn" />
+        <Button text="Log out" onAction="#handleLogout" styleClass="button-red" />
+    </HBox>
+
+    <!-- Page Title -->
+    <Label styleClass="text-title" text="Edit User" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="80" />
+
+    <!-- User Details Form -->
+    <VBox spacing="20" AnchorPane.leftAnchor="180" AnchorPane.rightAnchor="180" AnchorPane.topAnchor="160">
+        <!-- Name Field -->
+        <VBox spacing="5">
+            <Label text="Name" />
+            <TextField fx:id="txtUserName" promptText="Name" />
+        </VBox>
+
+        <!-- Email Field -->
+        <VBox spacing="5">
+            <Label text="Email" />
+            <TextField fx:id="txtEmail" promptText="Email" />
+        </VBox>
+
+        <!-- Password Field -->
+        <VBox spacing="5">
+            <Label text="Password" />
+            <PasswordField fx:id="txtPassword" promptText="New Password (leave empty to keep current)" />
+        </VBox>
+
+        <!-- Role ComboBox -->
+        <VBox spacing="5">
+            <Label text="Role" />
+            <ComboBox fx:id="cmbRole" promptText="Select Role">
+                <items>
+                    <FXCollections fx:factory="observableArrayList"/>
+                </items>
+            </ComboBox>
+        </VBox>
+    </VBox>
+
+    <VBox AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" AnchorPane.bottomAnchor="20" spacing="10" alignment="CENTER">
+        <Label fx:id="errorLabel" visible="false" styleClass="error-message" managed="false" />
+        <!-- Save Button -->
+        <Button fx:id="btnSaveUser" text="Save User" onAction="#handleSaveUser" styleClass="button-primary" />
+    </VBox>
+
+</AnchorPane>

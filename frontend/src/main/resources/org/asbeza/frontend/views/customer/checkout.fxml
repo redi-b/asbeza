@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Separator?>
+<AnchorPane stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/17.0.6"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.asbeza.frontend.controllers.customer.CheckoutController">
+
+    <!-- Navbar -->
+    <HBox spacing="10" styleClass="navbar" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
+        <Label fx:id="lblUserName" />
+    </HBox>
+    <HBox spacing="10" styleClass="navbar" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+        <Button text="Back to Products" onAction="#goToBrowse" styleClass="navbar-btn" />
+        <Button text="Back to Cart" onAction="#goToCart" styleClass="navbar-btn" />
+        <Button text="Log out" onAction="#handleLogout" styleClass="button-red" />
+    </HBox>
+
+    <VBox spacing="20" styleClass="content-wrapper" AnchorPane.topAnchor="60" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="60">
+        <!-- Page Title -->
+        <Label styleClass="text-title" text="Checkout" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="60" />
+
+        <!-- Shipping Information -->
+        <VBox spacing="20" styleClass="vbox-centered" AnchorPane.topAnchor="100" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" maxWidth="600">
+            <Label styleClass="text-subtitle" text="Shipping Information" />
+            <TextField fx:id="shippingAddressField" promptText="Enter your shipping address" styleClass="text-field" />
+            <TextField fx:id="shippingPhoneField" promptText="Enter your phone number" styleClass="text-field" />
+
+            <!-- Error label -->
+            <Label fx:id="errorLabel" visible="false"  styleClass="error-message" managed="false" />
+        </VBox>
+
+        <!-- Separator -->
+        <Separator />
+
+        <!-- Order Items -->
+        <VBox fx:id="cartDetailsContainer" spacing="15" styleClass="order-items-container" />
+    </VBox>
+
+    <!-- Confirm Order Button -->
+    <HBox spacing="20" styleClass="vbox-centered" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" AnchorPane.bottomAnchor="20">
+        <Button fx:id="confirmOrderButton" text="Confirm Order" onAction="#handleConfirmOrder" styleClass="button-primary" />
+    </HBox>
+
+</AnchorPane>

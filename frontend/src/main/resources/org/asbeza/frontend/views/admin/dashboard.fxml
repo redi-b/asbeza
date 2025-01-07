@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/styles.css"
+            fx:controller="org.asbeza.frontend.controllers.admin.DashboardController">
+
+    <!-- Navbar -->
+    <HBox AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20" spacing="8">
+        <HBox styleClass="navbar">
+            <Label fx:id="lblUserName" styleClass="navbar-label" />
+        </HBox>
+        <HBox styleClass="navbar">
+            <Label text="ADMIN" styleClass="navbar-label" />
+        </HBox>
+    </HBox>
+    <HBox spacing="10" styleClass="navbar" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+        <Button text="Log out" onAction="#handleLogout" styleClass="button-red" />
+    </HBox>
+
+    <!-- Title centered but slightly lowered -->
+    <Label styleClass="text-title" text="Admin Dashboard" AnchorPane.topAnchor="120" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" />
+
+    <!-- Button Grid Section -->
+    <VBox alignment="CENTER" spacing="40" AnchorPane.topAnchor="200" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" AnchorPane.bottomAnchor="50">
+        <GridPane alignment="CENTER" hgap="30" vgap="20">
+            <!-- Row 1 -->
+            <Button text="Add Product" onAction="#goToAddProduct" styleClass="grid-btn" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+            <Button text="Inventory Management" onAction="#goToManageProducts" styleClass="grid-btn" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+            <!-- Row 2 -->
+            <Button text="User Management" onAction="#goToManageUsers" styleClass="grid-btn" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+            <Button text="Order Management" onAction="#goToManageOrders" styleClass="grid-btn" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+        </GridPane>
+    </VBox>
+
+</AnchorPane>
