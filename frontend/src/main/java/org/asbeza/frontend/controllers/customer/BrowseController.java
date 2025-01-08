@@ -307,6 +307,7 @@ public class BrowseController extends CommonController {
                 btn.setText("Add to Cart");
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(productsContainer.getScene().getWindow());
                 alert.setTitle("Error");
                 alert.setHeaderText("Failed to add to cart");
                 alert.setContentText("Error message: " + errorMessage);

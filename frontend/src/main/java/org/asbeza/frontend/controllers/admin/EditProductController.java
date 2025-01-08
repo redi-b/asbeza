@@ -139,6 +139,7 @@ public class EditProductController extends CommonController {
 
                 // Handle success by showing an alert with the success message
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initOwner(btnSaveProduct.getScene().getWindow());
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
                 alert.setContentText("Product updated successfully!");

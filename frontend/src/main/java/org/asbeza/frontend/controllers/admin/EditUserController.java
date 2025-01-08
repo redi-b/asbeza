@@ -114,6 +114,7 @@ public class EditUserController extends CommonController {
                 saveActionEnd();
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initOwner(btnSaveUser.getScene().getWindow());
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
                 alert.setContentText("User updated successfully!");

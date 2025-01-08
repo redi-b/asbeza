@@ -127,6 +127,7 @@ public class AddProductController extends CommonController {
 
                 // Handle success by showing an alert with the success message
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initOwner(btnAddProduct.getScene().getWindow());
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
                 alert.setContentText("Product added successfully!");

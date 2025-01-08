@@ -103,6 +103,7 @@ public class EditOrderController extends CommonController {
 
                 // Handle success by showing an alert with the success message
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initOwner(btnSaveOrder.getScene().getWindow());
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
                 alert.setContentText("Order status updated!");
@@ -179,6 +180,7 @@ public class EditOrderController extends CommonController {
                 deleteActionEnd();
                 // Show success alert
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initOwner(btnDeleteOrder.getScene().getWindow());
                 alert.setTitle("Order Deleted Successfully");
                 alert.setHeaderText("Order has been cancelled.");
                 alert.getDialogPane().getStyleClass().add("alert-information");
@@ -194,6 +196,7 @@ public class EditOrderController extends CommonController {
             public void onFailure(String errorMessage) {
                 deleteActionEnd();
                 Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(btnDeleteOrder.getScene().getWindow());
                 alert.setTitle("Error");
                 alert.setHeaderText("Failed to delete order");
                 alert.setContentText("Error message: " + errorMessage);

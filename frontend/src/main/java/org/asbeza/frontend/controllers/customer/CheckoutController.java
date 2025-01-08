@@ -106,6 +106,7 @@ public class CheckoutController extends CommonController {
 
                 // Show success alert
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initOwner(confirmOrderButton.getScene().getWindow());
                 alert.setTitle("Order Placed Successfully");
                 alert.setHeaderText("Your order has been placed successfully.");
                 alert.getDialogPane().getStyleClass().add("alert-information");
@@ -123,6 +124,7 @@ public class CheckoutController extends CommonController {
                 confirmOrderEnd();
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(confirmOrderButton.getScene().getWindow());
                 alert.setTitle("Error");
                 alert.setHeaderText("Failed to place order");
                 alert.setContentText("Error message: " + errorMessage);

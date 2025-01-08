@@ -102,6 +102,7 @@ public class EditOrderController extends CommonController {
 
                 // Handle success by showing an alert with the success message
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initOwner(btnSaveOrder.getScene().getWindow());
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
                 alert.setContentText("Order status updated!");
