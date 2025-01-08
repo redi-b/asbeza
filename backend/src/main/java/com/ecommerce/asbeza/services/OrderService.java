@@ -5,6 +5,7 @@ import com.ecommerce.asbeza.models.*;
 import com.ecommerce.asbeza.repositories.*;
 import com.ecommerce.asbeza.types.OrderStatus;
 import com.ecommerce.asbeza.types.Role;
+import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -28,6 +29,7 @@ public class OrderService {
     private final CartRepository cartRepository;
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final EmailService emailService;
 
     // Create Order from Cart
     public OrderResponseDTO createOrder(OrderRequestDTO orderRequest) {
@@ -79,6 +81,16 @@ public class OrderService {
 
         // Save and return order response
         order = orderRepository.save(order);
+
+        // Send email notification
+//        try {
+//            String emailBody = generateEmailBody(order); // Generate email content
+//            emailService.sendEmail(user.getEmail(), "Order Confirmation", emailBody);
+//        } catch (MessagingException e) {
+//            // Log the error and proceed without interrupting order creation
+//            System.err.println("Error sending email: " + e.getMessage());
+//        }
+
         return modelMapper.map(order, OrderResponseDTO.class);
     }
 
@@ -207,5 +219,41 @@ public class OrderService {
         return deliveryPersonnelList.stream()
                 .min(Comparator.comparingInt(orderRepository::countByDeliveryPersonnel))
                 .orElse(null);
+    }
+
+    private String generateEmailBody(Order order) {
+        String paymentLink = "https://payment-processor.netlify.app?orderId=" + order.getId();
+
+        return """
+            <html>
+                <body>
+                    <h2>Order Confirmation</h2>
+                    <p>Dear %s,</p>
+                    <p>Thank you for your order! Here are your order details:</p>
+                    <ul>
+                        <li>Order ID: %d</li>
+                        <li>Total Price: $%.2f</li>
+                        <li>Status: %s</li>
+                        <li>Delivery Address: %s</li>
+                    </ul>
+                    <p>
+                        <strong>Important:</strong> To complete your order,\s
+                        please make the payment within <strong>2 hours</strong>.\s
+                        If payment is not completed in time, your order will be automatically cancelled.
+                    </p>
+                    <p>You can make the payment by clicking the link below:</p>
+                    <a href="%s">Complete Payment</a>
+                    <p>We look forward to serving you!</p>
+                    <p>Thank you for shopping with us!</p>
+                </body>
+            </html>
+        """.formatted(
+                order.getUser().getName(),
+                order.getId(),
+                order.getTotalPrice(),
+                order.getStatus(),
+                order.getAddress(),
+                paymentLink
+        );
     }
 }
