@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
 
@@ -153,15 +154,34 @@ public class SessionManager {
     private static String getTokenFilePath() {
         String os = System.getProperty("os.name").toLowerCase();
         String userHome = System.getProperty("user.home");
+        String filePath = "";
 
         // Linux/macOS: Use home directory or a config directory
         if (os.contains("nix") || os.contains("mac")) {
-            return userHome + File.separator + ".asbeza" + File.separator + "session_token.txt";
+            filePath = userHome + File.separator + ".asbeza" + File.separator + "session_token.txt";
         }
         // Windows: Use local app data
         else if (os.contains("win")) {
-            return System.getenv("LOCALAPPDATA") + File.separator + "Asbeza" + File.separator + "session_token.txt";
+            filePath = System.getenv("LOCALAPPDATA") + File.separator + "Asbeza" + File.separator + "session_token.txt";
         }
-        return userHome + File.separator + "session_token.txt"; // Default path
+        // Default path
+        else {
+            filePath = userHome + File.separator + "session_token.txt";
+        }
+
+        // Ensure the directories exist
+        Path path = Paths.get(filePath);
+        Path parentDir = path.getParent(); // Get the parent directory
+
+        // Create the parent directory if it doesn't exist
+        if (parentDir != null && Files.notExists(parentDir)) {
+            try {
+                Files.createDirectories(parentDir);  // Create the directory structure
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+            }
+        }
+
+        return filePath;
     }
 }
