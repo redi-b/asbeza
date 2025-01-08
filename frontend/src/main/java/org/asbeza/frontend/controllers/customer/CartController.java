@@ -63,6 +63,7 @@ public class CartController extends CommonController {
                     updateCartItemsContainer(cartResponse.getItems());
                     if (!cartResponse.getItems().isEmpty()) checkoutBtn.setDisable(false);
                     checkoutBtn.setOnAction((event) -> handleCheckout(cartResponse));
+                    showError(false);
                     showLoading(false);
                 } catch (Exception e) {
                     showLoading(false);
@@ -236,6 +237,7 @@ public class CartController extends CommonController {
 
     public void handleRefresh(ActionEvent actionEvent) {
         cache.remove("cartItems");
+        showError(false);
         showLoading(true);
         loadCartItems();
     }

@@ -22,10 +22,8 @@ import org.asbeza.frontend.types.Product;
 import org.asbeza.frontend.utils.ImageUtil;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class ManageProductsController extends CommonController {
@@ -36,6 +34,9 @@ public class ManageProductsController extends CommonController {
 
     private final ObservableList<Product> allProducts = FXCollections.observableArrayList();
     private final ObservableList<Product> filteredProducts = FXCollections.observableArrayList();
+
+    // Image cache to store already loaded images
+    private static final Map<String, Image> imageCache = new ConcurrentHashMap<>();
 
     @FXML
     public void initialize() {
@@ -169,6 +170,19 @@ public class ManageProductsController extends CommonController {
     }
 
     private static ImageView getImageView(HBox card, String imageStr) {
+        if (imageStr == null || imageStr.isEmpty()) {
+            imageStr = "https://fakeimg.pl/100x100?text=Asbeza";
+        }
+
+        // Check if the image is already cached
+        Image image = imageCache.get(imageStr);
+        if (image == null) {
+            // If not cached, load the image and store it in the cache
+            image = ImageUtil.createImage(imageStr); // Assuming ImageUtil is a utility to create Image objects
+            imageCache.put(imageStr, image); // Store the image in cache
+        }
+
+        // Create an ImageView for the image
         ImageView productImageView = new ImageView();
         productImageView.setPreserveRatio(false); // Allow image to stretch
         productImageView.setFitWidth(card.getPrefHeight()); // Fixed width
@@ -180,9 +194,9 @@ public class ManageProductsController extends CommonController {
         clip.setArcHeight(15); // Rounded corners height
         productImageView.setClip(clip);
 
-        // Load product image
-        Image image = ImageUtil.createImage(imageStr);
+        // Set the image
         productImageView.setImage(image);
+
         return productImageView;
     }
 

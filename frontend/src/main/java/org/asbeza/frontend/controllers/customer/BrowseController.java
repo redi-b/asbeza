@@ -70,6 +70,7 @@ public class BrowseController extends CommonController {
                 filteredProducts.setAll(allProducts);
                 updateProductContainer();
                 loadCategories();
+                showError(false);
                 showLoading(false);
                 return;
             }
@@ -95,6 +96,7 @@ public class BrowseController extends CommonController {
 
                     loadCategories();
 
+                    showError(false);
                     showLoading(false);
                 } catch (Exception e) {
                     loadCategories();
@@ -250,6 +252,12 @@ public class BrowseController extends CommonController {
     }
 
     private void loadProductImageAsync(String imageUrl, ImageView imageView) {
+
+        if (imageUrl == null || imageUrl.isEmpty()) {
+            imageView.setImage(ImageUtil.createImage("https://fakeimg.pl/100x100?text=Asbeza"));
+            return;
+        }
+
         // Check if the image is already in the cache
         if (imageCache.containsKey(imageUrl)) {
             // Use the cached image

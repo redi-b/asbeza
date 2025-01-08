@@ -10,7 +10,7 @@ import java.util.Base64;
 
 public class SessionManager {
 
-    private static final String TOKEN_FILE = "session_token.txt"; // File to store the token
+    private static final String TOKEN_FILE =  getTokenFilePath(); // File to store the token
     private static SessionManager instance;
 
     private SessionManager() {
@@ -147,5 +147,21 @@ public class SessionManager {
             clearToken(); // Clear invalid token
             return null;
         }
+    }
+
+    // Determine a secure storage location for the token (based on OS)
+    private static String getTokenFilePath() {
+        String os = System.getProperty("os.name").toLowerCase();
+        String userHome = System.getProperty("user.home");
+
+        // Linux/macOS: Use home directory or a config directory
+        if (os.contains("nix") || os.contains("mac")) {
+            return userHome + File.separator + ".asbeza" + File.separator + "session_token.txt";
+        }
+        // Windows: Use local app data
+        else if (os.contains("win")) {
+            return System.getenv("LOCALAPPDATA") + File.separator + "Asbeza" + File.separator + "session_token.txt";
+        }
+        return userHome + File.separator + "session_token.txt"; // Default path
     }
 }
