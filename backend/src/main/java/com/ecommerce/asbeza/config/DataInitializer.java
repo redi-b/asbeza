@@ -6,9 +6,13 @@ import com.ecommerce.asbeza.services.ProductService;
 import com.ecommerce.asbeza.services.UserService;
 import com.ecommerce.asbeza.types.Role;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -25,31 +29,37 @@ public class DataInitializer implements CommandLineRunner {
         // Create ADMIN user if not exists
         userService.registerUser(
                 new UserRequestDTO(
-                        "Admin", "admin@asbeza.com", "Admin@123"
+                        "Hiwot Assefa", "admin@asbeza.com", "Admin@123"
                 ),
                 Role.ADMIN
         );
 
-        List<String> deliveryEmails = List.of("delivery1@asbeza.com", "delivery2@asbeza.com", "delivery3@asbeza.com");
-        for (String email : deliveryEmails) {
-            userService.registerUser(
-                    new UserRequestDTO(
-                            "Delivery Personnel", email, "Delivery@123"
-                    ),
-                    Role.DELIVERY_PERSONNEL
-            );
-        }
+        List<UserRequestDTO> deliveryPersonnels = List.of(
+                new UserRequestDTO(
+                        "Yohannes Ayele", "delivery1@asbeza.com", "Delivery@123"
+                ),
+                new UserRequestDTO(
+                        "Mulugeta Kebede", "delivery2@asbeza.com", "Delivery@123"
+                ),
+                new UserRequestDTO(
+                        "Amina Mohammed", "delivery3@asbeza.com", "Delivery@123"
+                )
+        );
+        deliveryPersonnels.forEach(deliveryPersonnel -> userService.registerUser(deliveryPersonnel, Role.DELIVERY_PERSONNEL));
 
         // Create customers
-        List<String> customerEmails = List.of("customer1@asbeza.com", "customer2@asbeza.com", "customer3@asbeza.com");
-        for (String email : customerEmails) {
-            userService.registerUser(
-                    new UserRequestDTO(
-                            "Customer", email, "Customer@123"
-                    ),
-                    Role.CUSTOMER
-            );
-        }
+        List<UserRequestDTO> customers = List.of(
+                new UserRequestDTO(
+                        "Dawit Mekonnen", "customer1@asbeza.com", "Customer@123"
+                ),
+                new UserRequestDTO(
+                        "Muluwork Tekle", "customer2@asbeza.com", "Customer@123"
+                ),
+                new UserRequestDTO(
+                        "Genet Tesfaye", "customer3@asbeza.com", "Customer@123"
+                )
+        );
+        customers.forEach(customer -> userService.registerUser(customer, Role.CUSTOMER));
 
         List<ProductRequestDTO> products = List.of(
                 new ProductRequestDTO(
@@ -60,7 +70,7 @@ public class DataInitializer implements CommandLineRunner {
                         "",
                         50,
                         new BigDecimal("0.0"),
-                        "https://fakeimg.pl/100x100?text=Injera"
+                        null
                 ),
                 new ProductRequestDTO(
                         "Berbere Spice",
@@ -70,7 +80,7 @@ public class DataInitializer implements CommandLineRunner {
                         "kg",
                         40,
                         new BigDecimal("5.0"),
-                        "https://fakeimg.pl/100x100?text=Berbere"
+                        null
                 ),
                 new ProductRequestDTO(
                         "Shiro Powder",
@@ -80,7 +90,7 @@ public class DataInitializer implements CommandLineRunner {
                         "kg",
                         30,
                         new BigDecimal("10.0"),
-                        "https://fakeimg.pl/100x100?text=Shiro"
+                        null
                 ),
                 new ProductRequestDTO(
                         "Mitmita Spice",
@@ -90,7 +100,7 @@ public class DataInitializer implements CommandLineRunner {
                         "kg",
                         25,
                         new BigDecimal("0.0"),
-                        "https://fakeimg.pl/100x100?text=Mitmita"
+                        null
                 ),
                 new ProductRequestDTO(
                         "Coffee Beans",
@@ -100,7 +110,7 @@ public class DataInitializer implements CommandLineRunner {
                         "kg",
                         60,
                         new BigDecimal("15.0"),
-                        "https://fakeimg.pl/100x100?text=Coffee"
+                        null
                 ),
                 new ProductRequestDTO(
                         "Teff Flour",
@@ -110,7 +120,7 @@ public class DataInitializer implements CommandLineRunner {
                         "kg",
                         70,
                         new BigDecimal("0.0"),
-                        "https://fakeimg.pl/100x100?text=Teff"
+                        null
                 ),
                 new ProductRequestDTO(
                         "Honey Wine (Tej)",
@@ -120,7 +130,7 @@ public class DataInitializer implements CommandLineRunner {
                         "litre",
                         15,
                         new BigDecimal("0.0"),
-                        "https://fakeimg.pl/100x100?text=Tej"
+                        null
                 ),
                 new ProductRequestDTO(
                         "Shinkurt (Onion)",
@@ -130,7 +140,7 @@ public class DataInitializer implements CommandLineRunner {
                         "kg",
                         80,
                         new BigDecimal("0.0"),
-                        "https://fakeimg.pl/100x100?text=Shinkurt"
+                        null
                 ),
                 new ProductRequestDTO(
                         "Nech Shinkurt (Garlic)",
@@ -140,7 +150,7 @@ public class DataInitializer implements CommandLineRunner {
                         "kg",
                         30,
                         new BigDecimal("0.0"),
-                        "https://fakeimg.pl/100x100?text=Garlic"
+                        null
                 ),
                 new ProductRequestDTO(
                         "Dinich (Potato)",
@@ -150,7 +160,7 @@ public class DataInitializer implements CommandLineRunner {
                         "kg",
                         100,
                         new BigDecimal("0.0"),
-                        "https://fakeimg.pl/100x100?text=Dinich"
+                        null
                 ),
                 new ProductRequestDTO(
                         "Tikel Gomen (Cabbage)",
@@ -160,7 +170,7 @@ public class DataInitializer implements CommandLineRunner {
                         "kg",
                         50,
                         new BigDecimal("0.0"),
-                        "https://fakeimg.pl/100x100?text=Cabbage"
+                        null
                 ),
                 new ProductRequestDTO(
                         "Karia (Green Chili)",
@@ -170,7 +180,7 @@ public class DataInitializer implements CommandLineRunner {
                         "kg",
                         20,
                         new BigDecimal("0.0"),
-                        "https://fakeimg.pl/100x100?text=Karia"
+                        null
                 ),
                 new ProductRequestDTO(
                         "Timatim (Tomato)",
@@ -180,7 +190,7 @@ public class DataInitializer implements CommandLineRunner {
                         "kg",
                         90,
                         new BigDecimal("0.0"),
-                        "https://fakeimg.pl/100x100?text=Timatim"
+                        null
                 ),
                 new ProductRequestDTO(
                         "Telba (Flaxseed)",
@@ -190,7 +200,7 @@ public class DataInitializer implements CommandLineRunner {
                         "kg",
                         60,
                         new BigDecimal("0.0"),
-                        "https://fakeimg.pl/100x100?text=Telba"
+                        null
                 ),
                 new ProductRequestDTO(
                         "Kibe (Spiced Butter)",
@@ -200,13 +210,58 @@ public class DataInitializer implements CommandLineRunner {
                         "kg",
                         20,
                         new BigDecimal("0.0"),
-                        "https://fakeimg.pl/100x100?text=Kibe"
+                        null
                 )
         );
 
 
-        products.forEach(product -> productService.addProduct(product, null));
+        products.forEach(product -> productService.addProduct(
+                product,
+                getProductImageAsMultipartFile(product.getName())
+        ));
 
 
+    }
+
+    private MultipartFile getProductImageAsMultipartFile(String productName) {
+        try {
+            // Map product names to resource image paths
+            String imagePath = switch (productName) {
+                case "Injera" -> "/productImages/injera.jpg";
+                case "Berbere Spice" -> "/productImages/berbere.jpg";
+                case "Mitmita Spice" -> "/productImages/mitmita.jpg";
+                case "Coffee Beans" -> "/productImages/coffee.jpg";
+                case "Teff Flour" -> "/productImages/teff.jpg";
+                case "Honey Wine (Tej)" -> "/productImages/tej.jpg";
+                case "Shinkurt (Onion)" -> "/productImages/shinkurt.jpg";
+                case "Nech Shinkurt (Garlic)" -> "/productImages/garlic.jpg";
+                case "Dinich (Potato)" -> "/productImages/dinich.jpg";
+                case "Tikel Gomen (Cabbage)" -> "/productImages/tikel_gomen.jpg";
+                case "Karia (Green Chili)" -> "/productImages/karia.jpg";
+                case "Timatim (Tomato)" -> "/productImages/timatim.jpg";
+                case "Telba (Flaxseed)" -> "/productImages/telba.jpg";
+                case "Kibe (Spiced Butter)" -> "/productImages/kibe.jpg";
+                case "Shiro Powder" -> "/productImages/shiro.jpg";
+                default -> null;
+            };
+
+            // Read the image file from resources
+            InputStream inputStream = null;
+            if (imagePath != null) {
+                inputStream = getClass().getResourceAsStream(imagePath);
+            }
+
+            if (inputStream == null) {
+                return null;
+            }
+
+            // Create a MockMultipartFile with the input stream data
+            byte[] content = IOUtils.toByteArray(inputStream);
+            return new MockMultipartFile("file", productName + ".jpg", "image/jpeg", content);
+
+        } catch (Exception e) {
+            System.err.println("Failed to load image for product: " + productName);
+            return null;
+        }
     }
 }
